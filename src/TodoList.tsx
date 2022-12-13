@@ -14,15 +14,17 @@ export type TaskType = {
 }
 
 const TodoList = (props: TodoListPropsType) => {
-    const tasksItems = props.tasks.map((task: TaskType) => {
-        return (
-        <li key={task.id}>
-            <input type="checkbox" checked={task.isDone}/>
-            <span>{task.title}</span>
-            <button onClick={()=> props.removeTask(task.id)}>X</button>
-        </li>
-        )
-    })
+    const tasksItems = props.tasks.length
+        ? props.tasks.map((task: TaskType) => {
+            return (
+                <li key={task.id}>
+                    <input type="checkbox" checked={task.isDone}/>
+                    <span>{task.title}</span>
+                    <button onClick={() => props.removeTask(task.id)}>X</button>
+                </li>
+            )
+        })
+        : <span>Tasks list is empty</span>
     return (
         <div>
             <h3>{props.title}</h3>
