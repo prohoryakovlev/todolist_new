@@ -6,12 +6,13 @@ function App() {
     const todoListTitle: string = "What to learn"
     const todoListTitle_2: string = "What to buy"
 
-    const result = useState([
+    const [tasks, setTasks] = useState([
         {id: 1, title: "HTML & CSS", isDone: true},
         {id: 2, title: "ES6 & TS", isDone: true},
         {id: 3, title: "REACT", isDone: false},
     ])
-    console.log(result)
+
+
 
 
     // let tasks: Array<TaskType> = [
@@ -21,14 +22,13 @@ function App() {
     // ]
 
     const removeTask = (taskId: number) => {
-        tasks = tasks.filter(t => t.id !== taskId)
-        console.log(tasks)
+        setTasks(tasks.filter(t => t.id !== taskId))
     }
 
     return (
         <div className="App">
             <TodoList
-                removeTask = {removeTask}
+                removeTask={removeTask}
                 title={todoListTitle}
                 tasks={tasks}/>
             {/*<TodoList title={todoListTitle_2} tasks={tasks_2}/>*/}
