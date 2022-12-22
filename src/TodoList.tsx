@@ -37,7 +37,7 @@ const TodoList = (props: TodoListPropsType) => {
             <div>
                 <input
                 onChange={(e)=>setTtitle(e.currentTarget.value) }/>
-                <button onClick={()=> props.addTask("My Task")}>+</button>
+                <button onClick={()=> props.addTask(title)}>+</button>
             </div>
             <ul>
                 {tasksItems}
