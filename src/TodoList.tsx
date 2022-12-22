@@ -20,18 +20,18 @@ const TodoList = (props: TodoListPropsType) => {
     const [title, setTitle] = useState<string>("")
     const tasksItems = props.tasks.length
         ? props.tasks.map((task: TaskType) => {
-            const onClickRemoveTaskHandler = () => () => props.removeTask(task.id)
+            const onClickRemoveTaskHandler = () => props.removeTask(task.id)
             return (
                 <li key={task.id}>
                     <input type="checkbox" checked={task.isDone}/>
                     <span>{task.title}</span>
-                    <button onClick={onClickRemoveTaskHandler}>X</button>
+                    <button onClick={onClickRemoveTaskHandler}>x</button>
                 </li>
             )
         })
         : <span>Tasks list is empty</span>
 
-    const onClickAddTaskTodoListHandler = () => {
+    const onClickAddTaskTodoListHandler = () =>  {
         props.addTask(title)
         setTitle("")
     }
@@ -39,9 +39,13 @@ const TodoList = (props: TodoListPropsType) => {
     const onChangeSetLocalTitleHandler = () => (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
     const onKeyDawnAddTaskTodoListHandler = () => (e: KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && onClickAddTaskTodoListHandler()
 
-    const onClickSetAllFilterHandler = () => () => props.changeFilter("all")
-    const onClickSetActiveFilterHandler = () => () => props.changeFilter("active")
-    const onClickSetCompletedFilterHandler = () => () => props.changeFilter("completed")
+    const onClickSetAllFilterHandler = () => props.changeFilter("all")
+    const onClickSetActiveFilterHandler = () => props.changeFilter("active")
+    const onClickSetCompletedFilterHandler =  () => props.changeFilter("completed")
+
+
+    const getOnClickSetFilterHandler = (filter: FilterValueType) => () => props.changeFilter(filter)
+
 
     return (
         <div>
@@ -58,9 +62,9 @@ const TodoList = (props: TodoListPropsType) => {
                 {tasksItems}
             </ul>
             <div>
-                <button onClick={onClickSetAllFilterHandler}>All</button>
-                <button onClick={onClickSetActiveFilterHandler}>Active</button>
-                <button onClick={onClickSetCompletedFilterHandler}>Completed</button>
+                <button onClick={getOnClickSetFilterHandler("all")}>All</button>
+                <button onClick={getOnClickSetFilterHandler("active")}>Active</button>
+                <button onClick={getOnClickSetFilterHandler("completed")}>Completed</button>
             </div>
         </div>
     );
