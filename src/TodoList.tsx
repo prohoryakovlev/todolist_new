@@ -36,8 +36,8 @@ const TodoList = (props: TodoListPropsType) => {
         setTitle("")
     }
 
-    const onChangeSetLocalTitleHandler = () => (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
-    const onKeyDawnAddTaskTodoListHandler = () => (e: KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && onClickAddTaskTodoListHandler()
+    const onChangeSetLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+    const onKeyDownAddTaskTodoListHandler = (e: KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && onClickAddTaskTodoListHandler()
 
     const onClickSetAllFilterHandler = () => props.changeFilter("all")
     const onClickSetActiveFilterHandler = () => props.changeFilter("active")
@@ -54,7 +54,7 @@ const TodoList = (props: TodoListPropsType) => {
                 <input
                     value={title}
                     onChange={onChangeSetLocalTitleHandler}
-                    onKeyDown={onKeyDawnAddTaskTodoListHandler}
+                    onKeyDown={onKeyDownAddTaskTodoListHandler}
                 />
                 <button onClick={onClickAddTaskTodoListHandler}>+</button>
             </div>
