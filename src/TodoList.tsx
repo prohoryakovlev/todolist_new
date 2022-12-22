@@ -17,8 +17,8 @@ export type TaskType = {
 }
 
 const TodoList = (props: TodoListPropsType) => {
-    const [title, setTtitle] = useState<string>("")
-
+    const [title, setTitle] = useState<string>("")
+    console.log(title)
     const tasksItems = props.tasks.length
 
         ? props.tasks.map((task: TaskType) => {
@@ -31,21 +31,30 @@ const TodoList = (props: TodoListPropsType) => {
             )
         })
         : <span>Tasks list is empty</span>
+    
+    const addTask = () => {
+        props.addTask(title)
+        setTitle("")
+    }
+
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
                 <input
-                onChange={(e)=>setTtitle(e.currentTarget.value) }/>
-                <button onClick={()=> props.addTask(title)}>+</button>
+                    value={title}
+                    onChange={(e) => setTitle(e.currentTarget.value)}
+                    onKeyDown = {(e)=> e.key === "Enter" && addTask()}
+                />
+                <button onClick={addTask}>+</button>
             </div>
             <ul>
                 {tasksItems}
             </ul>
             <div>
-                <button onClick={()=> props.changeFilter("all")}>All</button>
-                <button onClick={()=> props.changeFilter("active")}>Active</button>
-                <button onClick={()=> props.changeFilter("completed")}>Completed</button>
+                <button onClick={() => props.changeFilter("all")}>All</button>
+                <button onClick={() => props.changeFilter("active")}>Active</button>
+                <button onClick={() => props.changeFilter("completed")}>Completed</button>
             </div>
         </div>
     );
