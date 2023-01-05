@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import TodoList, {TaskType} from "./TodoList";
 import {v1} from "uuid";
@@ -19,9 +19,8 @@ function App() {
         setTasks(tasks.filter(t => t.id !== taskId))
     }
     const changeFilter = (filter: FilterValueType) => {
-      setFilter(filter)
+        setFilter(filter)
     }
-
     const addTask = (title: string) => {
         const newTask: TaskType = {
             id: v1(),
@@ -29,6 +28,11 @@ function App() {
             isDone: false
         }
         setTasks([newTask, ...tasks])
+    }
+
+    const changeStatus = (taskId: string) => {
+        setTasks(tasks.map(t =>t.id === taskId ? {...t, isDone: !t.isDone}: t))
+
     }
 
     const getFilterTasksForRender = () => {
@@ -52,7 +56,7 @@ function App() {
                 removeTask={removeTask}
                 title={todoListTitle}
                 changeFilter={changeFilter}
-                tasks={filterTasksForRender} />
+                tasks={filterTasksForRender}/>
         </div>
     );
 }
