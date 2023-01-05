@@ -21,12 +21,13 @@ const TodoList = (props: TodoListPropsType) => {
     const tasksItems = props.tasks.length
         ? props.tasks.map((task: TaskType) => {
             const onClickRemoveTaskHandler = () => props.removeTask(task.id)
+            const onChangeSetTaskStatus =()=> ()=> props.changeStatus(task.id)
             return (
                 <li key={task.id}>
                     <input
                         type="checkbox"
                         checked={task.isDone}
-                        onChange={()=> props.changeStatus(task.id)}
+                        onChange={onChangeSetTaskStatus}
                     />
                     <span>{task.title}</span>
                     <button onClick={onClickRemoveTaskHandler}>x</button>
