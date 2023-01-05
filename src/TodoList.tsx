@@ -1,4 +1,4 @@
-import React, {ChangeEvent,KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValueType} from "./App";
 
 type TodoListPropsType = {
@@ -26,7 +26,7 @@ const TodoList = (props: TodoListPropsType) => {
         ? props.tasks.map((task: TaskType) => {
             const onClickRemoveTaskHandler = () => props.removeTask(task.id)
             const onChangeSetTaskStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
-            const isDoneClasses = task.isDone ? "isDone": "notIsDone"
+            const isDoneClasses = task.isDone ? "isDone" : "notIsDone"
             return (
                 <li key={task.id}>
                     <input
@@ -41,9 +41,9 @@ const TodoList = (props: TodoListPropsType) => {
         })
         : <span>Tasks list is empty</span>
 
-    const onClickAddTaskTodoListHandler = () =>  {
+    const onClickAddTaskTodoListHandler = () => {
         const trimmedTitle = title.trim()
-        if(trimmedTitle){
+        if (trimmedTitle) {
             props.addTask(trimmedTitle)
         } else {
             setError(true)
@@ -60,11 +60,13 @@ const TodoList = (props: TodoListPropsType) => {
 
     const onClickSetAllFilterHandler = () => props.changeDodoListFilter("all")
     const onClickSetActiveFilterHandler = () => props.changeDodoListFilter("active")
-    const onClickSetCompletedFilterHandler =  () => props.changeDodoListFilter("completed")
+    const onClickSetCompletedFilterHandler = () => props.changeDodoListFilter("completed")
 
-
+    const errorMessageStyle = {color: "red", margin: "0px"}
     const getOnClickSetFilterHandler = (filter: FilterValueType) => () => props.changeDodoListFilter(filter)
 
+    const errorInputClasses = error ? "inputError" : undefined
+    const errorMessage = error && <p style={errorMessageStyle}>Please, enter task title</p>
 
     return (
         <div>
@@ -74,24 +76,25 @@ const TodoList = (props: TodoListPropsType) => {
                     value={title}
                     onChange={onChangeSetLocalTitleHandler}
                     onKeyDown={onKeyDownAddTaskTodoListHandler}
-                    className={error ? "inputError": undefined}
+                    className={errorInputClasses}
                 />
                 <button onClick={onClickAddTaskTodoListHandler}>+</button>
+                {errorMessage}
             </div>
             <ul>
                 {tasksItems}
             </ul>
             <div>
                 <button
-                    className={props.filter === "all"? "activeFilter": undefined}
+                    className={props.filter === "all" ? "activeFilter" : undefined}
                     onClick={getOnClickSetFilterHandler("all")}>All
                 </button>
                 <button
-                    className={props.filter === "active"? "activeFilter": undefined}
+                    className={props.filter === "active" ? "activeFilter" : undefined}
                     onClick={getOnClickSetFilterHandler("active")}>Active
                 </button>
                 <button
-                    className={props.filter === "completed"? "activeFilter": undefined}
+                    className={props.filter === "completed" ? "activeFilter" : undefined}
                     onClick={getOnClickSetFilterHandler("completed")}>Completed
                 </button>
             </div>
