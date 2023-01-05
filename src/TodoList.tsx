@@ -39,7 +39,9 @@ const TodoList = (props: TodoListPropsType) => {
         : <span>Tasks list is empty</span>
 
     const onClickAddTaskTodoListHandler = () =>  {
-        props.addTask(title)
+        const trimmedTitle = title.trim()
+        trimmedTitle && props.addTask(trimmedTitle)
+
         setTitle("")
     }
 
