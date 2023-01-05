@@ -6,8 +6,8 @@ type TodoListPropsType = {
     tasks: Array<TaskType>
     removeTask: (taskId: string) => void
     addTask: (title: string) => void
-    changeFilter: (filter: FilterValueType) => void
-    changeStatus: (taskId: string) => void
+    changeDodoListFilter: (filter: FilterValueType) => void
+    changeTaskStatus: (taskId: string, isDone: boolean) => void
 }
 
 export type TaskType = {
@@ -21,7 +21,7 @@ const TodoList = (props: TodoListPropsType) => {
     const tasksItems = props.tasks.length
         ? props.tasks.map((task: TaskType) => {
             const onClickRemoveTaskHandler = () => props.removeTask(task.id)
-            const onChangeSetTaskStatus =()=> ()=> props.changeStatus(task.id)
+            const onChangeSetTaskStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
             return (
                 <li key={task.id}>
                     <input
@@ -44,12 +44,12 @@ const TodoList = (props: TodoListPropsType) => {
     const onChangeSetLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
     const onKeyDownAddTaskTodoListHandler = (e: KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && onClickAddTaskTodoListHandler()
 
-    const onClickSetAllFilterHandler = () => props.changeFilter("all")
-    const onClickSetActiveFilterHandler = () => props.changeFilter("active")
-    const onClickSetCompletedFilterHandler =  () => props.changeFilter("completed")
+    const onClickSetAllFilterHandler = () => props.changeDodoListFilter("all")
+    const onClickSetActiveFilterHandler = () => props.changeDodoListFilter("active")
+    const onClickSetCompletedFilterHandler =  () => props.changeDodoListFilter("completed")
 
 
-    const getOnClickSetFilterHandler = (filter: FilterValueType) => () => props.changeFilter(filter)
+    const getOnClickSetFilterHandler = (filter: FilterValueType) => () => props.changeDodoListFilter(filter)
 
 
     return (
