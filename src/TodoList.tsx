@@ -29,7 +29,7 @@ const TodoList = (props: TodoListPropsType) => {
                         checked={task.isDone}
                         onChange={onChangeSetTaskStatus}
                     />
-                    <span>{task.title}</span>
+                    <span className={task.isDone ? "isDone": "notIsDone"}>{task.title}</span>
                     <button onClick={onClickRemoveTaskHandler}>x</button>
                 </li>
             )

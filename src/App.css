@@ -6,3 +6,12 @@
 .App > div {
   margin-right: 50px;
 }
+
+.isDone {
+  text-decoration: line-through;
+}
+
+.notIsDone {
+  font-weight: bold;
+
+}
