@@ -13,5 +13,13 @@
 
 .notIsDone {
   font-weight: bold;
+}
 
+.activeFilter {
+  color: white;
+  font-weight: bold;
+  background-color: hotpink;
+  border: 2px solid hotpink;
+  border-radius: 3px;
+  outline-color: hotpink;
 }

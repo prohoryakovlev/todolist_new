@@ -22,6 +22,7 @@ const TodoList = (props: TodoListPropsType) => {
         ? props.tasks.map((task: TaskType) => {
             const onClickRemoveTaskHandler = () => props.removeTask(task.id)
             const onChangeSetTaskStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
+            const isDoneClasses = task.isDone ? "isDone": "notIsDone"
             return (
                 <li key={task.id}>
                     <input
@@ -29,7 +30,7 @@ const TodoList = (props: TodoListPropsType) => {
                         checked={task.isDone}
                         onChange={onChangeSetTaskStatus}
                     />
-                    <span className={task.isDone ? "isDone": "notIsDone"}>{task.title}</span>
+                    <span className={isDoneClasses}>{task.title}</span>
                     <button onClick={onClickRemoveTaskHandler}>x</button>
                 </li>
             )
@@ -67,7 +68,7 @@ const TodoList = (props: TodoListPropsType) => {
                 {tasksItems}
             </ul>
             <div>
-                <button onClick={getOnClickSetFilterHandler("all")}>All</button>
+                <button className={"activeFilter"} onClick={getOnClickSetFilterHandler("all")}>All</button>
                 <button onClick={getOnClickSetFilterHandler("active")}>Active</button>
                 <button onClick={getOnClickSetFilterHandler("completed")}>Completed</button>
             </div>
