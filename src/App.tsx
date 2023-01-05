@@ -56,6 +56,7 @@ function App() {
                 removeTask={removeTask}
                 title={todoListTitle}
                 changeFilter={changeFilter}
+                changeStatus ={changeStatus}
                 tasks={filterTasksForRender}/>
         </div>
     );
