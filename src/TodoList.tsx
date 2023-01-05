@@ -19,6 +19,9 @@ export type TaskType = {
 
 const TodoList = (props: TodoListPropsType) => {
     const [title, setTitle] = useState<string>("")
+
+    const [error, setError] = useState<boolean>(false)
+
     const tasksItems = props.tasks.length
         ? props.tasks.map((task: TaskType) => {
             const onClickRemoveTaskHandler = () => props.removeTask(task.id)
@@ -40,12 +43,19 @@ const TodoList = (props: TodoListPropsType) => {
 
     const onClickAddTaskTodoListHandler = () =>  {
         const trimmedTitle = title.trim()
-        trimmedTitle && props.addTask(trimmedTitle)
+        if(trimmedTitle){
+            props.addTask(trimmedTitle)
+        } else {
+            setError(true)
+        }
 
         setTitle("")
     }
 
-    const onChangeSetLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+    const onChangeSetLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        error && setError(false)
+        setTitle(e.currentTarget.value)
+    }
     const onKeyDownAddTaskTodoListHandler = (e: KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && onClickAddTaskTodoListHandler()
 
     const onClickSetAllFilterHandler = () => props.changeDodoListFilter("all")
@@ -64,6 +74,7 @@ const TodoList = (props: TodoListPropsType) => {
                     value={title}
                     onChange={onChangeSetLocalTitleHandler}
                     onKeyDown={onKeyDownAddTaskTodoListHandler}
+                    className={error ? "inputError": undefined}
                 />
                 <button onClick={onClickAddTaskTodoListHandler}>+</button>
             </div>
