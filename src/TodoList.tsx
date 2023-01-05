@@ -3,6 +3,7 @@ import {FilterValueType} from "./App";
 
 type TodoListPropsType = {
     title: string
+    filter: FilterValueType
     tasks: Array<TaskType>
     removeTask: (taskId: string) => void
     addTask: (title: string) => void
@@ -68,9 +69,18 @@ const TodoList = (props: TodoListPropsType) => {
                 {tasksItems}
             </ul>
             <div>
-                <button className={"activeFilter"} onClick={getOnClickSetFilterHandler("all")}>All</button>
-                <button onClick={getOnClickSetFilterHandler("active")}>Active</button>
-                <button onClick={getOnClickSetFilterHandler("completed")}>Completed</button>
+                <button
+                    className={props.filter === "all"? "activeFilter": undefined}
+                    onClick={getOnClickSetFilterHandler("all")}>All
+                </button>
+                <button
+                    className={props.filter === "active"? "activeFilter": undefined}
+                    onClick={getOnClickSetFilterHandler("active")}>Active
+                </button>
+                <button
+                    className={props.filter === "completed"? "activeFilter": undefined}
+                    onClick={getOnClickSetFilterHandler("completed")}>Completed
+                </button>
             </div>
         </div>
     );
